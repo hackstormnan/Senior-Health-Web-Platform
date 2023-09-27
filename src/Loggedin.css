@@ -1,0 +1,51 @@
+/* Loggedin.css */
+
+.loggedin-container {
+    text-align: center;
+    padding: 80px; /* Increased padding for more spacing */
+    /* background-color: #d4dbda; Light gray background color */
+    background-image: url('../Image/Img_Sky.jpg');
+  }
+  
+  .logout-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .loggedin-title {
+    font-size: 36px;
+    margin-bottom: 20px; /* Increased margin for more spacing */
+  }
+  
+  .loggedin-subtitle {
+    font-size: 28px;
+    margin-bottom: 20px; /* Increased margin for more spacing */
+  }
+  
+  .public-content {
+    font-size: 25px;
+    margin-top: 50px; /* Increased margin for more spacing */
+  }
+  
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Increased margin for more spacing */
+  }
+  
+  .link-list-item {
+    margin-bottom: 20px; /* Increased margin for more spacing */
+  }
+  
+  .link {
+    font-size: 25px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    color: #0056b3; /* Change color on hover */
+  }
+  

@@ -1,0 +1,81 @@
+/* Searchjournal.css */
+.searchjournal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../Image/Img_Blue.jpg");
+  padding: 20px;
+}
+
+.searchjournal-form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.searchjournal-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #000000; /* 将边框颜色改为黑色 */
+  border-radius: 5px;
+  font-size: 30px; /* 调整字体大小为原来的1.5倍 */
+}
+
+.searchjournal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 30px; /* 调整字体大小为原来的1.5倍 */
+  cursor: pointer;
+}
+
+.searchjournal-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* 设置结果列表宽度为100% */
+}
+
+.searchjournal-result {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  font-size: 30px; /* 调整字体大小为原来的1.5倍 */
+  border: 2px solid #000000; /* 将边框颜色改为黑色 */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: left; /* 左对齐文本内容 */
+}
+
+.searchjournal-result:hover {
+  color: #0056b3;
+  border-color: #0056b3;
+}
+
+.searchjournal-title {
+  margin: 0;
+  font-size: 36px; /* 调整字体大小为原来的1.5倍 */
+  text-align: center; /* 标题文本居中 */
+}
+
+.searchjournal-summary,
+.searchjournal-content {
+  margin: 0;
+  font-size: 27px; /* 调整字体大小为原来的1.5倍 */
+}
+
+/* Pagination.css */
+.pagination {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.searchjournal-container h2{
+    font-size: 50px;
+}

@@ -1,0 +1,58 @@
+/* Alljournal.css */
+.alljournal-container h2 {
+    font-size: 50px;
+}
+
+.alljournal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("../Image/Img_Blue.jpg");
+    padding: 20px;
+  }
+  
+  .alljournal-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .alljournal-result {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 30px; /* 调整字体大小为原来的1.5倍 */
+    border: 2px solid #000000; /* 将边框颜色改为黑色 */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: left; /* 左对齐文本内容 */
+  }
+  
+  .alljournal-result:hover {
+    color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .alljournal-title {
+    margin: 0;
+    font-size: 36px; /* 调整字体大小为原来的1.5倍 */
+    text-align: center; /* 标题文本居中 */
+  }
+  
+  .alljournal-summary,
+  .alljournal-content {
+    margin: 0;
+    font-size: 27px; /* 调整字体大小为原来的1.5倍 */
+  }
+  
+  /* Pagination.css */
+  .pagination {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  

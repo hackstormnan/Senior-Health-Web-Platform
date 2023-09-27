@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pagination from './Pagination';
-
+import './Alljournal.css'; // 导入你的样式文件路径
+import env from './config';
 
 function Alljournal() {
   const [allArticles, setAllArticles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage] = useState(5); // 每页显示的文章数量
-
-  
+  const [articlesPerPage] = useState(1); // 每页显示的文章数量
 
   useEffect(() => {
     const fetchAllArticles = async () => {
       try {
-        console.log('111')
-        const response = await axios.get('http://127.0.0.1:5000/Alljournal');
-        console.log('111')
+        const response = await axios.get(env.apiUrl + '/Alljournal');
         setAllArticles(response.data.results);
       } catch (error) {
         console.error(error);
@@ -24,43 +21,41 @@ function Alljournal() {
     fetchAllArticles();
   }, []);
 
-  // 获取当前页面显示的文章
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticles = allArticles.slice(indexOfFirstArticle, indexOfLastArticle);
 
-  console.log(currentArticles)
-
-  // 分页切换函数
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-//   console.log(typeof(allArticles))
-
   return (
-    <div>
-      <h2>All Articles</h2>
-      <ul>
+    <div className="alljournal-container">
+      <h2>All Articles / 全部文章</h2>
+      <ul className="alljournal-results">
         {currentArticles.map((article, index) => (
-        <li key={index}>
-            <h3>Title: {article.title}</h3>
-            <p>Content: {article.content}</p>
-            <p>Summary: {article.summary}</p>
-        </li>
-      ))}
-        </ul>
-
+          <li key={index} className="alljournal-result">
+            <div className="alljournal-title">
+              <h3>Title / 标题</h3>
+              <h3>{article.title}</h3>
+            </div>
+            <div className="alljournal-summary">
+              <p>{article.summary}</p>
+            </div>
+            <div className="alljournal-content">
+              <p>{article.content}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
 
       <Pagination
-      
         itemsPerPage={articlesPerPage}
         totalItems={allArticles.length}
         totalPages={Math.ceil(allArticles.length / articlesPerPage)}
         currentPage={currentPage}
         paginate={paginate}
-        />
-
+      />
     </div>
   );
 }

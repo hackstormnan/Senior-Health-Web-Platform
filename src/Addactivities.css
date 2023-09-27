@@ -1,0 +1,50 @@
+/* Addactivities.css */
+.addactivities-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .addactivities-title {
+    margin: 0;
+    font-size: 47px; /* 原大小：36px，调整为增大1.3倍 */
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .addactivities-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+  }
+  
+  .addactivities-input {
+    width: 100%;
+    padding: 13px; /* 原大小：10px，调整为增大1.3倍 */
+    margin-bottom: 13px; /* 原大小：10px，调整为增大1.3倍 */
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 31.2px; /* 原大小：24px，调整为增大1.3倍 */
+    font-weight: bold;
+  }
+  
+  .addactivities-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 13px 26px; /* 原大小：10px 20px，调整为增大1.3倍 */
+    border-radius: 5px;
+    font-size: 31.2px; /* 原大小：24px，调整为增大1.3倍 */
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 50px;
+  }
+  
+  .addactivities-label {
+    font-size: 1.6em; /* 修改 label 文字大小为 1.6em */
+    margin-bottom: 10px; /* 添加底部间距 */
+  }
+  /* ... 其他样式 ... */

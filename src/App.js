@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+// import { HashRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import { UserProvider } from './Usercontext';
 
 
@@ -24,7 +25,10 @@ import Addactivities from './Addactivities';
 import Personalprofile from './Personalprofile';
 
 
+import Community from './Community'
 
+import News from './News';
+import AddNews from './Addnews';
 
 import Support from './Support'
 import Adminsupport from './Adminsupport';
@@ -63,8 +67,10 @@ function App() {
           <Route path="/Personalprofile" element={<Personalprofile />} />
 
 
+          <Route path="/Community" element={<Community />} />
 
-
+          <Route path="/News" element={<News />} />
+          <Route path="/AddNews" element={<AddNews />} />
 
           <Route path="/Support" element={<Support />} />
           <Route path="/Adminsupport" element={<Adminsupport />} />

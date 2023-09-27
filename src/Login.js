@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from './Usercontext';
-
+import './Login.css'; // Import your custom styles for Login here
+import env from './config';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showRegister, setShowRegister] = useState(false); // 新增状态来控制是否显示注册页面
+  const [showRegister, setShowRegister] = useState(false);
 
   const { saveUsername } = useUserContext();
 
   const handleLogin = () => {
-    // 发送 POST 请求到 Flask 后端
-    axios.post('http://127.0.0.1:5000/Login', { username, password })
+    axios.post(env.apiUrl + '/Login', { username, password })
       .then(response => {
         if (response.data === 'failure') {
           alert('Login failed. Please try again.');
         } else {
           setIsLoggedIn(true);
-          console.log(username)
-          saveUsername(username)
+          saveUsername(username);
         }
       })
       .catch(error => {
@@ -37,17 +36,19 @@ function Login() {
   const navigate = useNavigate();
 
   if (isLoggedIn) {
-    navigate('/Loggedin')
-  } else if (showRegister) { // 如果显示注册页面
+    navigate('/Loggedin');
+  } else if (showRegister) {
     navigate('/Register');
   } else {
     return (
-      <div>
-        <h2>Login</h2>
-        <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleShowRegister}>Register</button> {/* 添加注册按钮 */}
+      <div className="login-container"> {/* Add a surrounding container */}
+        <div className="login-box"> {/* Add a login box */}
+          <h2 className="login-heading">Login / 登录</h2>
+          <input className="login-input" type="text" placeholder="Username / 用户名" value={username} onChange={e => setUsername(e.target.value)} />
+          <input className="login-input" type="password" placeholder="Password / 密码" value={password} onChange={e => setPassword(e.target.value)} />
+          <button className="login-button" onClick={handleLogin}>Login / 登录</button>
+          <button className="register-button" onClick={handleShowRegister}>Register / 注册</button>
+        </div>
       </div>
     );
   }

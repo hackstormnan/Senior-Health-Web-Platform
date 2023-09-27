@@ -1,0 +1,68 @@
+/* Homepage.css */
+
+.homepage-container {
+    text-align: center;
+    background-color: #f2f2f2; /* Light gray background color */
+    padding: 40px;
+  }
+  
+
+
+  .bottom-picture {
+    background-image: url('../Image/Img_Seniorhealth.jpg'); /* 用您的图片路径替换 */
+    background-size: cover;
+    background-position: center;
+    height: 300px; /* 根据需要调整高度 */
+    margin-top: 30px; /* 调整上方间距 */
+  }
+  
+  .intro-background {
+    background-color: #e1d5d5ef; /* Light gray background color */
+    padding: 40px; /* Padding for the background area */
+    margin-bottom: 40px; /* Margin at the bottom of the intro background */
+  }
+  
+  .intro {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .public-content {
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .link-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .link-list-item {
+    margin-bottom: 20px;
+  }
+  
+  .link {
+    font-size: 25px;
+    color: #4419cf;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .login-link .link {
+    font-size: 20px;
+    color: #5a646e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .link:hover {
+    color: #544d4c; /* 设置链接在悬停时的颜色，可以根据需要进行调整 */
+  }
+  

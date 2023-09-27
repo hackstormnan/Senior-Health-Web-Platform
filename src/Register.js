@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from './Usercontext';
 import axios from 'axios';
-
+import './Register.css'; // Import your custom styles for Register here
+import env from './config';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -13,36 +14,34 @@ function Register() {
   const { saveUsername } = useUserContext();
 
   const handleRegister = () => {
-    // 发送 POST 请求到 Flask 后端
-    axios.post('http://127.0.0.1:5000/Register', { username, password })
-    .then(response => {
-      if (response.data === 'success') {
-        console.log('注册成功');
-        saveUsername(username)
-        navigate('/Loggedin');
-        return;
-
-      } else {
-        alert('Register failed. Please try again.');
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      alert('An error occurred. Please try again later.');
-    });
-  
+    axios.post(env.apiUrl + '/Register', { username, password })
+      .then(response => {
+        if (response.data === 'success') {
+          saveUsername(username);
+          navigate('/Loggedin');
+          return;
+        } else {
+          setErrorMessage('Register failed. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setErrorMessage('An error occurred. Please try again later.');
+      });
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button onClick={handleRegister}>Register</button>
-      <p style={{ color: 'red' }}>{errorMessage}</p>
-      <p>
-        已经有账号？<Link to="/Login">去登录</Link>
-      </p>
+    <div className="register-container"> {/* Add a surrounding container */}
+      <div className="register-box"> {/* Add a register box */}
+        <h2 className="register-heading">Register / 注册</h2>
+        <input className="register-input" type="text" placeholder="Username / 用户名" value={username} onChange={e => setUsername(e.target.value)} />
+        <input className="register-input" type="password" placeholder="Password / 密码" value={password} onChange={e => setPassword(e.target.value)} />
+        <button className="register-button" onClick={handleRegister}>Register / 注册</button>
+        <p className="error-message">{errorMessage}</p>
+        <p>
+          Already have an account? / 已经有帐号了？<Link to="/Login">Login here / 此处登录</Link>
+        </p>
+      </div>
     </div>
   );
 }

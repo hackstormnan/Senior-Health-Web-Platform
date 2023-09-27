@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useUserContext } from './Usercontext';
 import axios from 'axios';
+import './Personalprofile.css'; // 引入样式文件
+import env from './config';
 
-
-
-
-const userAttributes = [
-  'name', 'gender', 'age', 'height', 'weight', 'contact', 'address', 'email', 'bloodtype', 
-  'allergies', 'medicalhistory', 'averagesleepduration', 'dietarypreferences', 'exercisehabits', 'bmi',
-  'emergencycontact', 'healthgoals'
-];
 
 function PersonalProfile() {
   const { username } = useUserContext();
@@ -35,7 +29,6 @@ function PersonalProfile() {
     healthgoals: ''
   });
 
-  
   const [editable, setEditable] = useState(false);
 
   const handleEdit = () => {
@@ -53,136 +46,283 @@ function PersonalProfile() {
       ...prevState,
       [field]: value
     }));
-    console.log(field + value)
+    console.log(field + value);
   };
-
-
 
   const catchData = async () => {
     try {
+      const response = await axios.post(env.apiUrl + '/Initialprofile', { username });
+      console.log('数据发送成功');
 
-      const response = await axios.post('http://127.0.0.1:5000/Initialprofile', { username});
-      console.log('Data sent successfully');
-
-      const userData = response.data.results;
-      console.log(userData)
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        username: userData[0].username,
-        name: userData[0].name,
-        gender: userData[0].gender,
-        age: userData[0].age,
-        height: userData[0].height,
-        weight: userData[0].weight,
-        contact: userData[0].contact,
-        address: userData[0].address,
-        email: userData[0].email,
-        bloodtype: userData[0].bloodtype,
-        allergies: userData[0].allergies,
-        medicalhistory: userData[0].medicalhistory,
-
-        averagesleepduration: userData[0].averagesleepduration,
-        dietarypreferences: userData[0].dietarypreferences,
-        exercisehabits: userData[0].exercisehabits,
-        bmi: userData[0].bmi,
-        emergencycontact: userData[0].emergencycontact,
-        healthgoals: userData[0].healthgoals,
-      }));
+      const userData = response.data.results[0];
+      setUserInfo({
+        ...userInfo,
+        username: userData.username,
+        name: userData.name,
+        gender: userData.gender,
+        age: userData.age,
+        height: userData.height,
+        weight: userData.weight,
+        contact: userData.contact,
+        address: userData.address,
+        email: userData.email,
+        bloodtype: userData.bloodtype,
+        allergies: userData.allergies,
+        medicalhistory: userData.medicalhistory,
+        averagesleepduration: userData.averagesleepduration,
+        dietarypreferences: userData.dietarypreferences,
+        exercisehabits: userData.exercisehabits,
+        bmi: userData.bmi,
+        emergencycontact: userData.emergencycontact,
+        healthgoals: userData.healthgoals,
+      });
 
     } catch (error) {
-      console.error('Error sending data to backend:', error);
+      console.error('发送数据到后端时出错:', error);
     }
   };
   
   const fetchData = async () => {
     try {
-      const name = userInfo.name
-      const gender = userInfo.gender
-      const age = userInfo.age
-      const height = userInfo.height
-      const weight = userInfo.weight
-      const contact = userInfo.contact
-      const address = userInfo.address
-      const email = userInfo.email
-      const bloodtype = userInfo.bloodtype
-      const allergies = userInfo.allergies
-      const medicalhistory = userInfo.medicalhistory
-      const averagesleepduration = userInfo.averagesleepduration
-      const dietarypreferences = userInfo.dietarypreferences
-      const exercisehabits = userInfo.exercisehabits
-      const bmi = userInfo.bmi
-      const emergencycontact = userInfo.emergencycontact
-      const healthgoals = userInfo.healthgoals
-
-      const response = await axios.post('http://127.0.0.1:5000/Personalprofile', { username, name, gender, age, height, weight, contact
-    , address, email, bloodtype, allergies, medicalhistory, averagesleepduration, dietarypreferences, exercisehabits, bmi, emergencycontact, healthgoals});
-      console.log('Data sent to backend successfully');
-    //   console.log(response.data); // 这里是后端返回的数据
-
-      const userData = response.data.results;
-      console.log(userData)
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        username: userData[0].username,
-        name: userData[0].name,
-        gender: userData[0].gender,
-        age: userData[0].age,
-        height: userData[0].height,
-        weight: userData[0].weight,
-        contact: userData[0].contact,
-        address: userData[0].address,
-        email: userData[0].email,
-        bloodtype: userData[0].bloodtype,
-        allergies: userData[0].allergies,
-        medicalhistory: userData[0].medicalhistory,
-
-        averagesleepduration: userData[0].averagesleepduration,
-        dietarypreferences: userData[0].dietarypreferences,
-        exercisehabits: userData[0].exercisehabits,
-        bmi: userData[0].bmi,
-        emergencycontact: userData[0].emergencycontact,
-        healthgoals: userData[0].healthgoals,
-      }));
-
+      const response = await axios.post(env.apiUrl + '/Personalprofile', userInfo);
+      console.log('数据成功发送到后端');
+      const userData = response.data.results[0];
+      setUserInfo({
+        ...userInfo,
+        username: userData.username,
+        name: userData.name,
+        gender: userData.gender,
+        age: userData.age,
+        height: userData.height,
+        weight: userData.weight,
+        contact: userData.contact,
+        address: userData.address,
+        email: userData.email,
+        bloodtype: userData.bloodtype,
+        allergies: userData.allergies,
+        medicalhistory: userData.medicalhistory,
+        averagesleepduration: userData.averagesleepduration,
+        dietarypreferences: userData.dietarypreferences,
+        exercisehabits: userData.exercisehabits,
+        bmi: userData.bmi,
+        emergencycontact: userData.emergencycontact,
+        healthgoals: userData.healthgoals,
+      });
     } catch (error) {
-      console.error('Error sending data to backend:', error);
+      console.error('发送数据到后端时出错:', error);
     }
   };
 
   useEffect(() => {
     if (username !== '') {
-        catchData();
-
-
+      catchData();
     }
   }, [username]);
 
-  
-
   return (
-    <div>
-      <h2>个人界面 Personal Profile</h2>
-      <h2>用户名 Username: {username}</h2>
+    <div className="personal-profile-container">
+      <h2 className="profile-title">Personal Profile / 个人界面</h2>
+      <h2 className="username">Username / 用户名: {username}</h2>
 
-      <form>
-        {userAttributes.map(field => (
-          <div key={field}>
-            <label>{field}:</label>
-            <input
-              type="text"
-              value={userInfo[field]}
-              readOnly={!editable}
-              onChange={e => handleChange(field, e.target.value)}
-            />
-          </div>
-        ))}
+      <form className="profile-form">
+        <div className="profile-field">
+          <label className="field-label">Name / 姓名:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.name}
+            readOnly={!editable}
+            onChange={e => handleChange('name', e.target.value)}
+          />
+        </div>
+        
+        <div className="profile-field">
+          <label className="field-label">Gender / 性别:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.gender}
+            readOnly={!editable}
+            onChange={e => handleChange('gender', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Age / 年龄:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.age}
+            readOnly={!editable}
+            onChange={e => handleChange('age', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Height / 身高:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.height}
+            readOnly={!editable}
+            onChange={e => handleChange('height', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Weight / 体重:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.weight}
+            readOnly={!editable}
+            onChange={e => handleChange('weight', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Contact / 联系方式:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.contact}
+            readOnly={!editable}
+            onChange={e => handleChange('contact', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Address / 地址:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.address}
+            readOnly={!editable}
+            onChange={e => handleChange('address', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Email / 电子邮件:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.email}
+            readOnly={!editable}
+            onChange={e => handleChange('email', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Bloodtype / 血型:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.bloodtype}
+            readOnly={!editable}
+            onChange={e => handleChange('bloodtype', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Allergies / 过敏:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.allergies}
+            readOnly={!editable}
+            onChange={e => handleChange('allergies', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Medicalhistory / 病史:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.medicalhistory}
+            readOnly={!editable}
+            onChange={e => handleChange('medicalhistory', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Average Sleep Duration / 平均睡眠时长:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.averagesleepduration}
+            readOnly={!editable}
+            onChange={e => handleChange('averagesleepduration', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Dietary Preferences / 饮食喜好:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.dietarypreferences}
+            readOnly={!editable}
+            onChange={e => handleChange('dietarypreferences', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Exercise Habits / 运动习惯:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.exercisehabits}
+            readOnly={!editable}
+            onChange={e => handleChange('exercisehabits', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">BMI:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.bmi}
+            readOnly={!editable}
+            onChange={e => handleChange('bmi', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Emergency Contact / 紧急联系人:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.emergencycontact}
+            readOnly={!editable}
+            onChange={e => handleChange('emergencycontact', e.target.value)}
+          />
+        </div>
+
+        <div className="profile-field">
+          <label className="field-label">Health Goals / 健康目标:</label>
+          <input
+            type="text"
+            className="field-input"
+            value={userInfo.healthgoals}
+            readOnly={!editable}
+            onChange={e => handleChange('healthgoals', e.target.value)}
+          />
+        </div>
       </form>
+
       {editable ? (
         <div>
-          <button onClick={handleSave}>Save</button>
+          <button className="action-button save-button" onClick={handleSave}>
+            Save / 保存
+          </button>
         </div>
       ) : (
-        <button onClick={handleEdit}>Edit</button>
+        <button className="action-button edit-button" onClick={handleEdit}>
+          Edit / 编辑
+        </button>
       )}
     </div>
   );
