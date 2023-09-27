@@ -14,13 +14,13 @@ from Addactivities import addactivities_app
 from Personalprofile import personalprofile_app
 from Initialprofile import initialprofile_app
 
+from Community import community_app
 
-
-
+from AddNews import addnews_app
+from News import news_app
 
 from Support import support_app
 from Adminsupport import adminsupport_app
-# from Adminsupport import deletefeedbacks_app
 
 app = Flask(__name__)
 
@@ -42,10 +42,13 @@ app.register_blueprint(initialprofile_app)
 
 
 
+app.register_blueprint(community_app)
+
+app.register_blueprint(addnews_app)
+app.register_blueprint(news_app)
 
 app.register_blueprint(support_app)
 app.register_blueprint(adminsupport_app)
-# app.register_blueprint(deletefeedbacks_app)
 
 
 
